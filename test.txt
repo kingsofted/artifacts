@@ -1,8 +1,5 @@
 Testing from git/test branch
 add new 
-<<<<<<< HEAD
 I am from main 
 I am from test2/txt
-=======
 I am from test2/txt!
->>>>>>> 5b20ffa (test2/txt)
