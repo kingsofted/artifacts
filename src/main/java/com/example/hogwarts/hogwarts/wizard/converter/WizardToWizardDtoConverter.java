@@ -7,11 +7,11 @@ import com.example.hogwarts.hogwarts.wizard.Wizard;
 import com.example.hogwarts.hogwarts.wizard.dto.WizardDto;
 
 @Component
-public class WizardToWizardConverter implements Converter<Wizard, WizardDto> {
+public class WizardToWizardDtoConverter implements Converter<Wizard, WizardDto> {
 
     @Override
     public WizardDto convert(Wizard wizard) {
-        WizardDto wizardDto = new WizardDto(wizard.getId(), wizard.getName(), wizard.getNumberOfArtifacts());
+        WizardDto wizardDto = new WizardDto(wizard.getId(), wizard.getName(), wizard.getNumberOfArtifacts() != null? wizard.getNumberOfArtifacts():null);
 
         return wizardDto;
     }

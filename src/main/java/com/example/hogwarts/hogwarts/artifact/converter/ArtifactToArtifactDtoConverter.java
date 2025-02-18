@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.hogwarts.hogwarts.artifact.Artifact;
 import com.example.hogwarts.hogwarts.artifact.dto.ArtifactDto;
-import com.example.hogwarts.hogwarts.wizard.converter.WizardToWizardConverter;
+import com.example.hogwarts.hogwarts.wizard.converter.WizardToWizardDtoConverter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class ArtifactToArtifactDtoConverter implements Converter<Artifact, ArtifactDto> {
 
-    private final WizardToWizardConverter wizardConverter;
+    private final WizardToWizardDtoConverter wizardConverter;
 
     @Override
     public ArtifactDto convert(Artifact artifact) {
