@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.hogwarts.hogwarts.aop.AutoFill;
+import com.example.hogwarts.hogwarts.aop.OperationType;
 import com.example.hogwarts.hogwarts.artifact.Artifact;
 import com.example.hogwarts.hogwarts.artifact.converter.ArtifactDtoToArtifactConverter;
 import com.example.hogwarts.hogwarts.artifact.dto.ArtifactDto;
@@ -42,6 +44,7 @@ public class WizardController {
     }
 
     @GetMapping
+    @AutoFill(OperationType.MORNING)
     public Result findAllWizard(){
         List<Wizard> wizardList = wizardService.findAllWizards();
         return new Result(true, StatusCode.SUCCESS, "Find One Success", wizardList);
