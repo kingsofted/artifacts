@@ -20,12 +20,20 @@ public class AutoFillAspect {
 
     @Before("printField()")
     public void autoFillMethod(JoinPoint joinPoint) {
-        // Log or print when the method with @AutoFill is invoked
+        // Get the value from @AutoFill annotation
         AutoFill autoFillAnnotation = ((MethodSignature) joinPoint.getSignature()).getMethod()
                 .getAnnotation(AutoFill.class);
-        OperationType operationType = autoFillAnnotation.value(); // Get the value from @AutoFill annotation
-        
-        log.info("Autofilling for Operation: {}", operationType);
-        System.out.println("Autofilling for Operation: " + operationType);
+        OperationType operationType = autoFillAnnotation.value();
+
+        log.info("Autofilling: " + operationType);
+        // Get the value from the method
+        Object[] args = joinPoint.getArgs();
+        if (args == null || args.length == 0) {
+            return;
+        }
+
+        // public Result findWizardById(@PathVariable String wizardId)
+        // Take the first argument
+        log.info("First parameter: " + args[0]);
     }
 }

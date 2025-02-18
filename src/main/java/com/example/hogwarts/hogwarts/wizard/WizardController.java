@@ -37,6 +37,7 @@ public class WizardController {
     private final ArtifactDtoToArtifactConverter artifactConverter;
 
     @GetMapping("/{wizardId}")
+    @AutoFill(OperationType.AFTERNOON)
     public Result findWizardById(@PathVariable String wizardId){
         Wizard wizard = wizardService.findWizardbyId(wizardId);
 
