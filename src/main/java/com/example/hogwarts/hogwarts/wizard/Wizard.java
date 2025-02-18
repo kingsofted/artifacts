@@ -14,6 +14,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,6 +44,11 @@ public class Wizard implements Serializable {
 
     public Integer getNumberOfArtifacts() {
         return this.artifacts.size();
+    }
+
+    public void removeAllArtifacts() {
+        this.artifacts.stream().forEach(artifact -> artifact.setOwner(null));
+        this.artifacts = new ArrayList<>();
     }
 
 }
