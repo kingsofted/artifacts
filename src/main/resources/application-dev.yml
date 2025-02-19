@@ -11,6 +11,11 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  data:
+    redis:
+      host: ${SPRING_REDIS_HOST}
+      port: ${SPRING_REDIS_PORT}
+      database: ${SPRING_REDIS_DATABASE} # Which database to use? 0 - 15
 
 server:
   port: ${SERVER_PORT}
