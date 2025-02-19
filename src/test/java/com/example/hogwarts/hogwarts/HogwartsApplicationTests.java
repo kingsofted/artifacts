@@ -15,6 +15,8 @@ import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.core.ZSetOperations;
 
+import com.example.hogwarts.hogwarts.constant.User;
+
 @SpringBootTest
 class HogwartsApplicationTests {
 
@@ -67,13 +69,13 @@ class HogwartsApplicationTests {
 	}
 
 	@Test
-	public void testCommon(){
+	public void testCommon() {
 		Set keys = redisTemplate.keys("*");
 		System.out.println("Keys: " + keys);
 
 		System.out.println("Got: " + redisTemplate.hasKey("xiaoming"));
 
-		for(Object key : keys){
+		for (Object key : keys) {
 			DataType type = redisTemplate.type(key);
 			System.out.println(type.name());
 			// Retrieve value based on type
@@ -100,6 +102,17 @@ class HogwartsApplicationTests {
 			System.out.println("Value: " + value);
 
 		}
+	}
+
+	@Autowired
+	private User user; // Inject the User bean
+
+	@Test
+	public void testConfigurationUser() {
+
+		String name = user.getUsername();
+		String age = user.getAge();
+		System.out.println("NAME: " + name+ " " + age);
 	}
 
 }

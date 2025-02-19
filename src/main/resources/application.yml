@@ -5,3 +5,7 @@ spring:
 api:
   endpoint: 
     base-url: /api/v1
+
+test:
+  username: hong
+  age: 22
