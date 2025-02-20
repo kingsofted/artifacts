@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSocket Chat</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      #chatbox {
+        width: 50%;
+        margin: auto;
+        height: 300px;
+        border: 1px solid #ccc;
+        overflow-y: auto;
+        padding: 10px;
+        background: #f9f9f9;
+      }
+      #messageInput {
+        width: 40%;
+        padding: 10px;
+      }
+      #sendBtn {
+        padding: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>WebSocket Chat</h2>
+    <div id="chatbox"></div>
+    <br />
+    <input type="text" id="messageInput" placeholder="Type a message..." />
+    <button id="sendBtn">Send</button>
+    <button id="closeBtn">Close Connection</button>
+
+    <script>
+      const socket = new WebSocket("ws://localhost:8081/ws/88"); // Replace with your WebSocket server URL
+      const chatbox = document.getElementById("chatbox");
+      const messageInput = document.getElementById("messageInput");
+      const sendBtn = document.getElementById("sendBtn");
+      const closeBtn = document.getElementById("closeBtn");
+
+      socket.onopen = () => {
+        console.log("Connected to WebSocket server");
+        chatbox.innerHTML += "<p><strong>Connected to server</strong></p>";
+      };
+
+      socket.onmessage = (event) => {
+        chatbox.innerHTML += `<p>Server: ${event.data}</p>`;
+        chatbox.scrollTop = chatbox.scrollHeight;
+      };
+
+      socket.onclose = () => {
+        chatbox.innerHTML += "<p><strong>Disconnected from server</strong></p>";
+      };
+
+      socket.onerror = (error) => {
+        console.error("WebSocket Error:", error);
+      };
+
+      sendBtn.addEventListener("click", () => {
+        const message = messageInput.value.trim();
+        if (message) {
+          socket.send(message);
+          chatbox.innerHTML += `<p>You: ${message}</p>`;
+          messageInput.value = "";
+          chatbox.scrollTop = chatbox.scrollHeight;
+        }
+      });
+      closeBtn.addEventListener("click", () => {
+        socket.close(); 
+        chatbox.innerHTML += `<p><strong>Connection closed</strong></p>`;
+        chatbox.scrollTop = chatbox.scrollHeight;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+Spring Task
+Usage:
+1. Credit card bill sms every month 
+2. Ticket where user need to pay within 15 minutes if not delete the order
+3. Onboarding anniversary (every year send out notification)
+                           
